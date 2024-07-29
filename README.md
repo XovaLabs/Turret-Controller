@@ -6,8 +6,8 @@
 #include <ArduinoJson.h>
 
 // Replace with your network credentials
-const char* ssid = "Rodriguez";
-const char* password = "-HB9,bkCwR}FzXVp";
+const char* ssid = "Your_SSID";
+const char* password = "Your_Password";
 
 // Create an AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -70,4 +70,9 @@ void loop() {
   // Nothing to do here
 }
 
+```
+## Sending a Request - Example
+```
+curl -X POST http://<ESP32_IP>/control -H "Content-Type: application/json" -d '{"state":"on"}'
+curl -X POST http://<ESP32_IP>/control -H "Content-Type: application/json" -d '{"state":"off"}'
 ```
