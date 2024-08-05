@@ -1,4 +1,4 @@
-# Documentation for the ESP8266 Web Server and WebSocket Example
+# Documentation for the ESP8266 Web Server and WebSocket Turret Controller
 
 This code sets up an ESP8266 microcontroller to serve web pages and handle WebSocket connections using the `ESPAsyncWebServer` library. It allows users to interact with the device through a web interface and WebSocket connections.
 
