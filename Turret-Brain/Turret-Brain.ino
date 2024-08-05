@@ -5,8 +5,8 @@
 #include <WebSocketsServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Rodriguez";
-const char* password = "-HB9,bkCwR}FzXVp";
+const char* ssid = "Your_SSID";
+const char* password = "Your_Password";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
