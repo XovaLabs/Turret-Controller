@@ -6,6 +6,7 @@
 #include <ESPAsyncWebServer.h>
 #include <LittleFS.h>
 #include <WebSocketsServer.h>
+#include <ArduinoJson.h>
 
 class WebServerManager {
 public:
@@ -83,12 +84,32 @@ private:
     }
 
     void handleWebSocketMessage(uint8_t num, uint8_t *data, size_t len) {
-        data[len] = 0; // Null-terminate the string
-        Serial.printf("WebSocket Message: %s\n", (char *)data);
+  data[len] = 0; // Null-terminate the string
+  Serial.printf("WebSocket Message: %s\n", (char *)data);
 
-        // Send a response back to the client
-        webSocket.sendTXT(num, "Message received");
-    }
+  DynamicJsonDocument jsonDoc(2048);
+  deserializeJson(jsonDoc, (char *)data);
+
+  JsonObject joy1 = jsonDoc["joy1"];
+  int xPosition1 = joy1["xPosition"].as<int>();
+  int yPosition1 = joy1["yPosition"].as<int>();
+  String direction1 = joy1["direction"].as<String>();
+  int x1 = joy1["x"].as<int>();
+  int y1 = joy1["y"].as<int>();
+
+  JsonObject joy2 = jsonDoc["joy2"];
+  int xPosition2 = joy2["xPosition"].as<int>();
+  int yPosition2 = joy2["yPosition"].as<int>();
+  String direction2 = joy2["direction"].as<String>();
+  int x2 = joy2["x"].as<int>();
+  int y2 = joy2["y"].as<int>();
+
+  Serial.printf("Joy1: xPosition=%d, yPosition=%d, direction=%s, x=%d, y=%d\n", xPosition1, yPosition1, direction1.c_str(), x1, y1);
+  Serial.printf("Joy2: xPosition=%d, yPosition=%d, direction=%s, x=%d, y=%d\n", xPosition2, yPosition2, direction2.c_str(), x2, y2);
+
+  // Send a response back to the client
+  webSocket.sendTXT(num, "Message received");
+}
 
     void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length) {
         switch (type) {
@@ -107,7 +128,7 @@ private:
     }
 };
 
-WebServerManager serverManager("Asuka", "carlosvv");
+WebServerManager serverManager("Rodriguez", "-HB9,bkCwR}FzXVp");
 
 void setup() {
     serverManager.begin();
