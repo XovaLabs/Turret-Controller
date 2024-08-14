@@ -128,7 +128,7 @@ private:
     }
 };
 
-WebServerManager serverManager("Rodriguez", "-HB9,bkCwR}FzXVp");
+WebServerManager serverManager("Your_SSID", "Your_password");
 
 void setup() {
     serverManager.begin();
